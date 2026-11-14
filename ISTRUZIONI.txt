@@ -1,0 +1,23 @@
+STU GYM TRACKER — INSTALLAZIONE IPHONE
+
+CONTENUTO
+- index.html: applicazione
+- manifest.webmanifest: configurazione PWA
+- sw.js: cache offline
+- icon-192.png e icon-512.png: icone
+
+INSTALLAZIONE
+1. Pubblica tutti questi file in una stessa cartella su un hosting che fornisca HTTPS.
+   La PWA e il service worker richiedono HTTPS (oppure localhost per test).
+2. Apri l'indirizzo HTTPS in Safari su iPhone.
+3. Tocca Condividi → Aggiungi alla schermata Home.
+4. Conferma con Aggiungi. Apri l'icona Stu Gym per usare l'app.
+
+DATI E BACKUP
+- I carichi e lo storico sono salvati localmente nel browser dell'iPhone.
+- Usa Strumenti → Esporta backup per scaricare una copia JSON.
+- Importa backup sostituisce lo storico attualmente presente.
+- Non cancellare i dati di Safari o del sito senza prima esportare il backup.
+
+NOTA
+Questa è una prima versione locale: non sincronizza automaticamente i dati tra dispositivi.

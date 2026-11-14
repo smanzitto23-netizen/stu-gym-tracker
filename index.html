@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f6f8fc">
+<meta name="description" content="Diario personale per monitorare gli allenamenti e i carichi in palestra.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Stu Gym Tracker</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#182235;--muted:#718096;--line:#e7ebf2;--blue:#4263eb;--cyan:#16a6b6;--purple:#8763df;--orange:#f19a38;--green:#15966b;--shadow:0 8px 28px #24385b0d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:92px}
+header{padding:22px 18px 16px;background:linear-gradient(135deg,#fff 15%,#edf3ff);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;justify-content:space-between;max-width:760px;margin:auto}.brand{display:flex;gap:11px;align-items:center}.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,var(--blue),#7e9cff);display:grid;place-items:center;color:white;font-size:23px;box-shadow:0 5px 14px #4263eb40}
+h1{font-size:20px;margin:0;font-weight:800;letter-spacing:-.4px}.sub{font-size:12px;color:var(--muted);margin-top:3px}.pill{background:#eaf0ff;color:var(--blue);font-weight:700;font-size:11px;padding:7px 10px;border-radius:20px}
+main{max-width:760px;margin:0 auto;padding:18px 15px}.hero{background:linear-gradient(120deg,#4263eb,#6e8af3);color:#fff;border-radius:20px;padding:19px;margin-bottom:17px;box-shadow:0 10px 25px #4263eb2a}.hero small{opacity:.85}.hero h2{margin:6px 0;font-size:23px}.hero p{margin:0;font-size:13px;opacity:.9}
+.days{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:15px 0 20px}.day{border:1px solid var(--line);background:#fff;border-radius:15px;padding:13px 8px;text-align:left;cursor:pointer;box-shadow:var(--shadow);color:var(--ink)}.day.active{border:2px solid var(--blue);background:#f1f4ff;padding:12px 7px}.day b{display:block;font-size:14px}.day span{display:block;color:var(--muted);font-size:10px;margin-top:5px;line-height:1.3}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:18px 2px 10px}.section-title h2{font-size:17px;margin:0}.muted{color:var(--muted);font-size:12px}
+.exercise{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:var(--shadow)}.exhead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.exname{font-weight:750;font-size:14px}.scheme{font-size:11px;color:var(--blue);font-weight:700;white-space:nowrap;background:#eef2ff;padding:5px 8px;border-radius:20px}
+.inputs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.field label{display:block;font-size:10px;color:var(--muted);margin:0 0 5px 2px}.field input{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 10px;font:inherit;font-size:14px;background:#fbfcff;color:var(--ink);outline:none}.field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #4263eb18}
+.actions{display:flex;gap:8px;margin-top:10px}.btn{border:0;border-radius:11px;padding:11px 14px;font-weight:700;font-size:13px;cursor:pointer}.primary{background:var(--blue);color:#fff}.soft{background:#edf2ff;color:var(--blue)}.danger{background:#fff0f0;color:#c24141}.full{width:100%}
+nav{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:5;padding:8px max(10px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom))}
+.navinner{width:100%;max-width:650px;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.navbtn{background:transparent;border:0;color:#8792a6;padding:7px 3px;font-size:10px;font-weight:650;cursor:pointer;border-radius:12px}.navbtn strong{display:block;font-size:19px;margin-bottom:3px}.navbtn.active{color:var(--blue);background:#eef2ff}
+.panel{display:none}.panel.active{display:block}.statgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px}.stat b{font-size:23px;display:block}.stat span{font-size:11px;color:var(--muted)}
+.history-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;margin:9px 0}.history-item b{font-size:14px}.history-item p{margin:5px 0 0;color:var(--muted);font-size:12px}
+.timerbox{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;text-align:center}.clock{font-size:55px;font-weight:800;letter-spacing:-2px;margin:10px}.presets{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:12px 0}.preset{border:1px solid var(--line);background:#f8faff;border-radius:20px;padding:8px 12px;font-weight:700;color:var(--blue)}
+canvas{width:100%;height:220px;background:#fff;border:1px solid var(--line);border-radius:15px}
+.empty{text-align:center;color:var(--muted);padding:25px 12px;background:#fff;border:1px dashed #d7deeb;border-radius:15px;font-size:13px}
+.note{font-size:11px;color:var(--muted);line-height:1.5;margin:12px 3px}
+@media(min-width:620px){main{padding:24px}.exercise{padding:16px}.inputs{grid-template-columns:1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="brand"><div class="logo">🏋️</div><div><h1>Stu Gym Tracker</h1><div class="sub">Il tuo diario di forza</div></div></div><span class="pill">VERSIONE 1.0</span></div></header>
+<main>
+<section id="workout" class="panel active">
+ <div class="hero"><small>ALLENAMENTO IN CORSO</small><h2 id="welcome">Pronto a spingere?</h2><p>Registra i carichi durante la seduta e costruisci i tuoi progressi.</p></div>
+ <div class="days" id="days"></div>
+ <div class="section-title"><h2 id="daytitle">Giorno 1</h2><span class="muted" id="count"></span></div>
+ <div id="exercises"></div>
+ <button class="btn primary full" id="finish">✓ Salva allenamento</button>
+ <p class="note">Inserisci il carico in kg e, se vuoi, le ripetizioni effettivamente completate. Per i manubri indica il peso di un singolo manubrio. I dati vengono salvati su questo iPhone/browser.</p>
+</section>
+<section id="history" class="panel">
+ <div class="section-title"><h2>Storico allenamenti</h2><span class="muted" id="sessionCount">0 sedute</span></div>
+ <div id="historyList"></div>
+</section>
+<section id="progress" class="panel">
+ <div class="section-title"><h2>Progressi</h2><span class="muted">Carico registrato per esercizio</span></div>
+ <div class="statgrid"><div class="stat"><b id="totalSessions">0</b><span>Allenamenti salvati</span></div><div class="stat"><b id="bestLift">—</b><span>Carico massimo registrato</span></div></div>
+ <div class="section-title"><h2 style="margin-top:8px">Andamento dei carichi</h2></div>
+ <div class="field" style="margin-bottom:10px"><label>Seleziona esercizio</label><select id="chartExercise" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:white;color:var(--ink)"></select></div>
+ <canvas id="chart" width="700" height="260"></canvas>
+ <p class="note">Il grafico mostra il carico registrato nelle sedute salvate. I valori sono indicativi: confronta sempre esecuzioni e ripetizioni equivalenti.</p>
+</section>
+<section id="tools" class="panel">
+ <div class="section-title"><h2>Timer recuperi</h2></div>
+ <div class="timerbox"><div class="muted">TEMPO RIMANENTE</div><div class="clock" id="clock">01:30</div><div class="presets"><button class="preset" data-sec="60">60 sec</button><button class="preset" data-sec="90">90 sec</button><button class="preset" data-sec="120">120 sec</button><button class="preset" data-sec="180">180 sec</button></div><div class="actions" style="justify-content:center"><button class="btn primary" id="timerStart">Avvia</button><button class="btn soft" id="timerReset">Reset</button></div></div>
+ <div class="section-title"><h2>Backup dati</h2></div>
+ <div class="exercise"><p class="muted">Esporta lo storico in un file JSON oppure importa un backup precedente. Conserva il file in File o iCloud Drive.</p><div class="actions"><button class="btn primary" id="export">Esporta backup</button><label class="btn soft" for="importFile">Importa backup</label><input id="importFile" type="file" accept="application/json" hidden></div></div>
+</section>
+</main>
+<nav><div class="navinner">
+<button class="navbtn active" data-tab="workout"><strong>＋</strong>Allenamento</button>
+<button class="navbtn" data-tab="history"><strong>▤</strong>Storico</button>
+<button class="navbtn" data-tab="progress"><strong>↗</strong>Progressi</button>
+<button class="navbtn" data-tab="tools"><strong>◷</strong>Strumenti</button>
+</div></nav>
+<script>
+const DAYS=[
+ {title:"Giorno 1 · Petto, spalle e tricipiti",short:"Petto · Spalle · Tricipiti",items:[["Panca piana bilanciere","4 × 5"],["Panca inclinata manubri","3 × 8"],["Chest press","2 × 10"],["Croci ai cavi","2 × 12"],["Shoulder press macchina","3 × 8"],["Alzate laterali manubri","3 × 12"],["Push down ai cavi","3 × 10"],["Estensioni tricipiti sopra la testa","2 × 12"]]},
+ {title:"Giorno 2 · Schiena, bicipiti e avambracci",short:"Schiena · Bicipiti · Avambracci",items:[["Stacco da terra","3 × 4"],["Trazioni alla sbarra","3 × 6"],["Lat machine presa larga","3 × 8"],["Rematore bilanciere","3 × 6"],["Pulley basso","3 × 8"],["Pullover ai cavi","2 × 10"],["Curl bilanciere","3 × 6"],["Curl manubri alternato","3 × 8"],["Curl alla panca Scott","2 × 10"],["Wrist curl","2 × 12"]]},
+ {title:"Giorno 3 · Gambe, glutei e addominali",short:"Gambe · Glutei · Addominali",items:[["Squat bilanciere","4 × 5"],["Leg press","3 × 8"],["Front squat","3 × 6"],["Leg extension","3 × 10"],["Leg curl","3 × 8"],["Stacco rumeno","3 × 8"],["Hip thrust","3 × 8"],["Calf raises","4 × 12"],["Crunch ai cavi","3 × 12"],["Sollevamento gambe alla sbarra","3 × 10"]]}
+];
+const KEY="stuGymTracker_v1";let data=JSON.parse(localStorage.getItem(KEY)||'{"sessions":[]}');let selectedDay=0,remaining=90,timer=null;
+const save=()=>localStorage.setItem(KEY,JSON.stringify(data));
+const el=id=>document.getElementById(id);
+function renderDays(){el("days").innerHTML=DAYS.map((d,i)=>`<button class="day ${i===selectedDay?'active':''}" data-day="${i}"><b>Giorno ${i+1}</b><span>${d.short}</span></button>`).join("");document.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>{selectedDay=+b.dataset.day;renderDays();renderExercises()})}
+function renderExercises(){const d=DAYS[selectedDay];el("daytitle").textContent=d.title;el("count").textContent=d.items.length+" esercizi";el("exercises").innerHTML=d.items.map((x,i)=>`<div class="exercise"><div class="exhead"><div class="exname">${i+1}. ${x[0]}</div><span class="scheme">${x[1]}</span></div><div class="inputs"><div class="field"><label>CARICO (KG)</label><input inputmode="decimal" type="number" min="0" step="0.5" placeholder="es. 40" id="w${i}"></div><div class="field"><label>RIPETIZIONI EFFETTIVE</label><input inputmode="numeric" type="number" min="0" placeholder="es. 5" id="r${i}"></div></div></div>`).join("")}
+function saveWorkout(){const d=DAYS[selectedDay],entries=d.items.map((x,i)=>({exercise:x[0],scheme:x[1],weight:parseFloat(el("w"+i).value)||null,reps:parseInt(el("r"+i).value)||null})).filter(x=>x.weight!==null||x.reps!==null);if(!entries.length){alert("Inserisci almeno un carico o una ripetizione.");return}data.sessions.unshift({id:Date.now(),day:selectedDay,title:d.title,date:new Date().toISOString(),entries});save();alert("Allenamento salvato nello storico!");renderHistory();renderProgress();renderExercises()}
+function renderHistory(){el("sessionCount").textContent=data.sessions.length+" sedute";el("historyList").innerHTML=data.sessions.length?data.sessions.map(s=>`<div class="history-item"><b>${s.title}</b><p>${new Date(s.date).toLocaleString("it-IT",{dateStyle:"medium",timeStyle:"short"})} · ${s.entries.length} esercizi registrati</p>${s.entries.map(e=>`<p>${e.exercise}: <b>${e.weight??"—"} kg</b>${e.reps?" · "+e.reps+" rip.":""}</p>`).join("")}<div class="actions"><button class="btn danger" onclick="deleteSession(${s.id})">Elimina</button></div></div>`).join(""):'<div class="empty">Ancora nessun allenamento salvato.<br>Registra la prima seduta dalla scheda Allenamento.</div>'}
+function deleteSession(id){if(confirm("Eliminare questa seduta dallo storico?")){data.sessions=data.sessions.filter(s=>s.id!==id);save();renderHistory();renderProgress()}}
+function renderProgress(){el("totalSessions").textContent=data.sessions.length;const all=data.sessions.flatMap(s=>s.entries.filter(e=>e.weight!==null));el("bestLift").textContent=all.length?Math.max(...all.map(e=>e.weight))+" kg":"—";let names=[...new Set(DAYS.flatMap(d=>d.items.map(x=>x[0])))];el("chartExercise").innerHTML=names.map(n=>`<option>${n}</option>`).join("");drawChart()}
+function drawChart(){const c=el("chart"),ctx=c.getContext("2d"),name=el("chartExercise").value;ctx.clearRect(0,0,c.width,c.height);const pts=data.sessions.slice().reverse().flatMap(s=>s.entries.filter(e=>e.exercise===name&&e.weight!==null).map(e=>({v:e.weight,date:new Date(s.date)})));ctx.strokeStyle="#e8edf5";ctx.lineWidth=1;for(let i=1;i<5;i++){let y=20+i*45;ctx.beginPath();ctx.moveTo(45,y);ctx.lineTo(675,y);ctx.stroke()}if(!pts.length){ctx.fillStyle="#718096";ctx.font="16px sans-serif";ctx.fillText("Registra un carico per visualizzare il grafico",70,125);return}let min=Math.min(...pts.map(p=>p.v)),max=Math.max(...pts.map(p=>p.v));if(min===max){min=Math.max(0,min-5);max=max+5}const X=i=>55+i*(600/Math.max(pts.length-1,1)),Y=v=>220-(v-min)/(max-min)*175;ctx.strokeStyle="#4263eb";ctx.lineWidth=4;ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(X(i),Y(p.v)):ctx.moveTo(X(i),Y(p.v)));ctx.stroke();pts.forEach((p,i)=>{ctx.fillStyle="#16a6b6";ctx.beginPath();ctx.arc(X(i),Y(p.v),6,0,Math.PI*2);ctx.fill();ctx.fillStyle="#182235";ctx.font="12px sans-serif";ctx.fillText(p.v+" kg",X(i)-15,Y(p.v)-12)})}
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));document.querySelectorAll(".navbtn").forEach(n=>n.classList.remove("active"));el(b.dataset.tab).classList.add("active");b.classList.add("active");if(b.dataset.tab==="progress")renderProgress();if(b.dataset.tab==="history")renderHistory()});
+el("finish").onclick=saveWorkout;el("chartExercise").onchange=drawChart;
+function showTime(){el("clock").textContent=String(Math.floor(remaining/60)).padStart(2,"0")+":"+String(remaining%60).padStart(2,"0")}
+document.querySelectorAll("[data-sec]").forEach(b=>b.onclick=()=>{remaining=+b.dataset.sec;showTime()});
+el("timerStart").onclick=()=>{if(timer){clearInterval(timer);timer=null;el("timerStart").textContent="Riprendi";return}el("timerStart").textContent="Pausa";timer=setInterval(()=>{if(remaining>0){remaining--;showTime()}else{clearInterval(timer);timer=null;el("timerStart").textContent="Avvia";if(navigator.vibrate)navigator.vibrate([250,100,250]);}},1000)};
+el("timerReset").onclick=()=>{clearInterval(timer);timer=null;remaining=90;showTime();el("timerStart").textContent="Avvia"};
+el("export").onclick=()=>{const blob=new Blob([JSON.stringify({app:"Stu Gym Tracker",version:1,exportedAt:new Date().toISOString(),data},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="stu-gym-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();URL.revokeObjectURL(a.href)};
+el("importFile").onchange=async e=>{try{const obj=JSON.parse(await e.target.files[0].text());if(!obj.data||!Array.isArray(obj.data.sessions))throw Error();if(confirm("Importare il backup? Lo storico attuale verrà sostituito.")){data=obj.data;save();renderHistory();renderProgress();alert("Backup importato.")}}catch{alert("File di backup non valido.")}e.target.value=""};
+renderDays();renderExercises();renderHistory();renderProgress();showTime();
+if("serviceWorker" in navigator && location.protocol!=="file:")window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+</script>
+</body></html>
