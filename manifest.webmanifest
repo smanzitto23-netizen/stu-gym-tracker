@@ -1,7 +1,7 @@
 {
-  "name": "Stu Gym Tracker",
-  "short_name": "Stu Gym",
-  "description": "Diario personale per allenamenti e progressi in palestra",
+  "name": "Stu Gym Tracker 2.0",
+  "short_name": "Stu Gym 2.0",
+  "description": "Allenamento, alimentazione e progressi",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

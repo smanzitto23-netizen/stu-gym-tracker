@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f6f8fc">
-<meta name="description" content="Diario personale per monitorare gli allenamenti e i carichi in palestra.">
+<meta name="description" content="Allenamento, alimentazione e progressi: il tuo diario fitness personale.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
-<title>Stu Gym Tracker</title>
+<title>Stu Gym Tracker 2.0</title>
 <style>
 :root{--bg:#f5f7fb;--card:#fff;--ink:#182235;--muted:#718096;--line:#e7ebf2;--blue:#4263eb;--cyan:#16a6b6;--purple:#8763df;--orange:#f19a38;--green:#15966b;--shadow:0 8px 28px #24385b0d}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:92px}
@@ -21,18 +21,21 @@ main{max-width:760px;margin:0 auto;padding:18px 15px}.hero{background:linear-gra
 .inputs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.field label{display:block;font-size:10px;color:var(--muted);margin:0 0 5px 2px}.field input{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 10px;font:inherit;font-size:14px;background:#fbfcff;color:var(--ink);outline:none}.field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #4263eb18}
 .actions{display:flex;gap:8px;margin-top:10px}.btn{border:0;border-radius:11px;padding:11px 14px;font-weight:700;font-size:13px;cursor:pointer}.primary{background:var(--blue);color:#fff}.soft{background:#edf2ff;color:var(--blue)}.danger{background:#fff0f0;color:#c24141}.full{width:100%}
 nav{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:5;padding:8px max(10px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom))}
-.navinner{width:100%;max-width:650px;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.navbtn{background:transparent;border:0;color:#8792a6;padding:7px 3px;font-size:10px;font-weight:650;cursor:pointer;border-radius:12px}.navbtn strong{display:block;font-size:19px;margin-bottom:3px}.navbtn.active{color:var(--blue);background:#eef2ff}
+.navinner{width:100%;max-width:650px;display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.navbtn{background:transparent;border:0;color:#8792a6;padding:7px 3px;font-size:10px;font-weight:650;cursor:pointer;border-radius:12px}.navbtn strong{display:block;font-size:19px;margin-bottom:3px}.navbtn.active{color:var(--blue);background:#eef2ff}
 .panel{display:none}.panel.active{display:block}.statgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px}.stat b{font-size:23px;display:block}.stat span{font-size:11px;color:var(--muted)}
 .history-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;margin:9px 0}.history-item b{font-size:14px}.history-item p{margin:5px 0 0;color:var(--muted);font-size:12px}
 .timerbox{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;text-align:center}.clock{font-size:55px;font-weight:800;letter-spacing:-2px;margin:10px}.presets{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:12px 0}.preset{border:1px solid var(--line);background:#f8faff;border-radius:20px;padding:8px 12px;font-weight:700;color:var(--blue)}
 canvas{width:100%;height:220px;background:#fff;border:1px solid var(--line);border-radius:15px}
 .empty{text-align:center;color:var(--muted);padding:25px 12px;background:#fff;border:1px dashed #d7deeb;border-radius:15px;font-size:13px}
 .note{font-size:11px;color:var(--muted);line-height:1.5;margin:12px 3px}
+.foodgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.foodstat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}.foodstat b{display:block;font-size:20px}.foodstat span{font-size:11px;color:var(--muted)}
+.formcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin:10px 0}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.formgrid .field input,.formgrid .field select,.formcard select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px;background:#fbfcff;color:var(--ink);font:inherit;font-size:14px}.mealrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.waterbtn{border:0;background:#e9f8fb;color:#087f8c;border-radius:10px;padding:10px 13px;font-weight:750}.tag{font-size:10px;background:#eef8f5;color:#13835f;border-radius:20px;padding:5px 8px;font-weight:700}
+@media(max-width:390px){.navbtn{font-size:9px}.navbtn strong{font-size:17px}.navinner{gap:2px}}
 @media(min-width:620px){main{padding:24px}.exercise{padding:16px}.inputs{grid-template-columns:1fr 1fr 1fr}}
 </style>
 </head>
 <body>
-<header><div class="top"><div class="brand"><div class="logo">🏋️</div><div><h1>Stu Gym Tracker</h1><div class="sub">Il tuo diario di forza</div></div></div><span class="pill">VERSIONE 1.0</span></div></header>
+<header><div class="top"><div class="brand"><div class="logo">🏋️</div><div><h1>Stu Gym Tracker</h1><div class="sub">Allenamento · Alimentazione · Progressi</div></div></div><span class="pill">VERSIONE 2.0</span></div></header>
 <main>
 <section id="workout" class="panel active">
  <div class="hero"><small>ALLENAMENTO IN CORSO</small><h2 id="welcome">Pronto a spingere?</h2><p>Registra i carichi durante la seduta e costruisci i tuoi progressi.</p></div>
@@ -41,6 +44,22 @@ canvas{width:100%;height:220px;background:#fff;border:1px solid var(--line);bord
  <div id="exercises"></div>
  <button class="btn primary full" id="finish">✓ Salva allenamento</button>
  <p class="note">Inserisci il carico in kg e, se vuoi, le ripetizioni effettivamente completate. Per i manubri indica il peso di un singolo manubrio. I dati vengono salvati su questo iPhone/browser.</p>
+</section>
+<section id="nutrition" class="panel">
+ <div class="hero" style="background:linear-gradient(120deg,#15966b,#42b995)"><small>ALIMENTAZIONE</small><h2>Un passo alla volta.</h2><p>Registra pasti, calorie, macronutrienti, acqua e peso corporeo.</p></div>
+ <div class="section-title"><h2>Riepilogo di oggi</h2><span class="muted" id="foodDate"></span></div>
+ <div class="foodgrid"><div class="foodstat"><b id="kcalToday">0</b><span>kcal registrate</span></div><div class="foodstat"><b id="proteinToday">0 g</b><span>Proteine</span></div><div class="foodstat"><b id="carbsToday">0 g</b><span>Carboidrati</span></div><div class="foodstat"><b id="fatToday">0 g</b><span>Grassi</span></div></div>
+ <div class="formcard"><div class="section-title" style="margin-top:0"><h2>Aggiungi un pasto</h2><span class="tag">Diario alimentare</span></div>
+  <div class="formgrid"><div class="field"><label>PASTO</label><select id="mealType"><option>Colazione</option><option>Spuntino mattina</option><option>Pranzo</option><option>Spuntino pomeriggio</option><option>Cena</option><option>Altro</option></select></div><div class="field"><label>ALIMENTO / DESCRIZIONE</label><input id="foodName" placeholder="es. Pasta al pomodoro"></div>
+  <div class="field"><label>CALORIE (KCAL)</label><input id="foodKcal" type="number" min="0" placeholder="es. 450"></div><div class="field"><label>PROTEINE (G)</label><input id="foodProtein" type="number" min="0" step="0.1" placeholder="es. 25"></div>
+  <div class="field"><label>CARBOIDRATI (G)</label><input id="foodCarbs" type="number" min="0" step="0.1" placeholder="es. 55"></div><div class="field"><label>GRASSI (G)</label><input id="foodFat" type="number" min="0" step="0.1" placeholder="es. 12"></div></div>
+  <button class="btn primary full" id="addFood" style="margin-top:12px">＋ Registra alimento</button>
+  <p class="note">Inserisci i valori nutrizionali riportati in etichetta o stimati per la porzione consumata. Il conteggio è manuale: l'app non riconosce automaticamente gli alimenti.</p>
+ </div>
+ <div class="section-title"><h2>Diario di oggi</h2><button class="btn soft" id="clearFoodDay">Azzera oggi</button></div><div id="foodList"></div>
+ <div class="formcard"><div class="section-title" style="margin-top:0"><h2>Idratazione</h2><b id="waterTotal">0 ml</b></div><div class="actions"><button class="waterbtn" data-water="250">＋ 250 ml</button><button class="waterbtn" data-water="500">＋ 500 ml</button><button class="btn soft" id="waterReset">Reset oggi</button></div></div>
+ <div class="formcard"><div class="section-title" style="margin-top:0"><h2>Peso corporeo</h2><span class="muted">Registra il peso</span></div><div class="formgrid"><div class="field"><label>PESO (KG)</label><input id="weightInput" type="number" min="20" max="350" step="0.1" placeholder="es. 85.5"></div><div class="field"><label>OBIETTIVO (KG)</label><input id="goalInput" type="number" min="20" max="350" step="0.1" placeholder="es. 79"></div></div><button class="btn primary full" id="saveWeight" style="margin-top:10px">Salva peso e obiettivo</button><div id="weightSummary" class="note"></div><div id="weightHistory"></div></div>
+ <p class="note">Questa sezione è un diario, non una prescrizione dietetica. Quando avremo il peso aggiornato e i dati necessari, potremo definire un obiettivo calorico e proteico sensato.</p>
 </section>
 <section id="history" class="panel">
  <div class="section-title"><h2>Storico allenamenti</h2><span class="muted" id="sessionCount">0 sedute</span></div>
@@ -56,13 +75,14 @@ canvas{width:100%;height:220px;background:#fff;border:1px solid var(--line);bord
 </section>
 <section id="tools" class="panel">
  <div class="section-title"><h2>Timer recuperi</h2></div>
- <div class="timerbox"><div class="muted">TEMPO RIMANENTE</div><div class="clock" id="clock">01:30</div><div class="presets"><button class="preset" data-sec="60">60 sec</button><button class="preset" data-sec="90">90 sec</button><button class="preset" data-sec="120">120 sec</button><button class="preset" data-sec="180">180 sec</button></div><div class="actions" style="justify-content:center"><button class="btn primary" id="timerStart">Avvia</button><button class="btn soft" id="timerReset">Reset</button></div></div>
+ <div class="timerbox"><div class="muted">TEMPO RIMANENTE</div><div class="clock" id="clock">01:30</div><div class="presets"><button class="preset" data-sec="60">60 sec</button><button class="preset" data-sec="90">90 sec</button><button class="preset" data-sec="120">120 sec</button><button class="preset" data-sec="180">180 sec</button></div><div class="actions" style="justify-content:center"><button class="btn primary" id="timerStart">Avvia</button><button class="btn soft" id="timerReset">Reset</button></div><p class="note" style="text-align:center;margin-bottom:0">A fine recupero: avviso sonoro e vibrazione (se supportata). Tieni l’app aperta in primo piano per sentire l’allarme.</p></div>
  <div class="section-title"><h2>Backup dati</h2></div>
  <div class="exercise"><p class="muted">Esporta lo storico in un file JSON oppure importa un backup precedente. Conserva il file in File o iCloud Drive.</p><div class="actions"><button class="btn primary" id="export">Esporta backup</button><label class="btn soft" for="importFile">Importa backup</label><input id="importFile" type="file" accept="application/json" hidden></div></div>
 </section>
 </main>
 <nav><div class="navinner">
 <button class="navbtn active" data-tab="workout"><strong>＋</strong>Allenamento</button>
+<button class="navbtn" data-tab="nutrition"><strong>🥗</strong>Cibo</button>
 <button class="navbtn" data-tab="history"><strong>▤</strong>Storico</button>
 <button class="navbtn" data-tab="progress"><strong>↗</strong>Progressi</button>
 <button class="navbtn" data-tab="tools"><strong>◷</strong>Strumenti</button>
@@ -70,10 +90,12 @@ canvas{width:100%;height:220px;background:#fff;border:1px solid var(--line);bord
 <script>
 const DAYS=[
  {title:"Giorno 1 · Petto, spalle e tricipiti",short:"Petto · Spalle · Tricipiti",items:[["Panca piana bilanciere","4 × 5"],["Panca inclinata manubri","3 × 8"],["Chest press","2 × 10"],["Croci ai cavi","2 × 12"],["Shoulder press macchina","3 × 8"],["Alzate laterali manubri","3 × 12"],["Push down ai cavi","3 × 10"],["Estensioni tricipiti sopra la testa","2 × 12"]]},
- {title:"Giorno 2 · Schiena, bicipiti e avambracci",short:"Schiena · Bicipiti · Avambracci",items:[["Stacco da terra","3 × 4"],["Trazioni alla sbarra","3 × 6"],["Lat machine presa larga","3 × 8"],["Rematore bilanciere","3 × 6"],["Pulley basso","3 × 8"],["Pullover ai cavi","2 × 10"],["Curl bilanciere","3 × 6"],["Curl manubri alternato","3 × 8"],["Curl alla panca Scott","2 × 10"],["Wrist curl","2 × 12"]]},
+ {title:"Giorno 2 · Schiena, bicipiti e avambracci",short:"Schiena · Bicipiti · Avambracci",items:[["Stacco da terra","3 × 4"],["Rematore manubrio a un braccio","3 × 8-10 per lato"],["Lat machine presa larga","3 × 8"],["Rematore bilanciere","3 × 6"],["Pulley basso","3 × 8"],["Pullover ai cavi","2 × 10"],["Curl bilanciere","3 × 6"],["Curl manubri alternato","3 × 8"],["Curl alla panca Scott","2 × 10"],["Wrist curl","2 × 12"]]},
  {title:"Giorno 3 · Gambe, glutei e addominali",short:"Gambe · Glutei · Addominali",items:[["Squat bilanciere","4 × 5"],["Leg press","3 × 8"],["Front squat","3 × 6"],["Leg extension","3 × 10"],["Leg curl","3 × 8"],["Stacco rumeno","3 × 8"],["Hip thrust","3 × 8"],["Calf raises","4 × 12"],["Crunch ai cavi","3 × 12"],["Sollevamento gambe alla sbarra","3 × 10"]]}
 ];
-const KEY="stuGymTracker_v1";let data=JSON.parse(localStorage.getItem(KEY)||'{"sessions":[]}');let selectedDay=0,remaining=90,timer=null;
+const KEY="stuGymTracker_v1";let data=JSON.parse(localStorage.getItem(KEY)||'{"sessions":[]}');
+data.sessions=data.sessions||[];data.foodEntries=data.foodEntries||[];data.weights=data.weights||[];data.water=data.water||{};data.goalWeight=data.goalWeight||null;
+let selectedDay=0,remaining=90,timer=null;
 const save=()=>localStorage.setItem(KEY,JSON.stringify(data));
 const el=id=>document.getElementById(id);
 function renderDays(){el("days").innerHTML=DAYS.map((d,i)=>`<button class="day ${i===selectedDay?'active':''}" data-day="${i}"><b>Giorno ${i+1}</b><span>${d.short}</span></button>`).join("");document.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>{selectedDay=+b.dataset.day;renderDays();renderExercises()})}
@@ -87,11 +109,24 @@ document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{document.query
 el("finish").onclick=saveWorkout;el("chartExercise").onchange=drawChart;
 function showTime(){el("clock").textContent=String(Math.floor(remaining/60)).padStart(2,"0")+":"+String(remaining%60).padStart(2,"0")}
 document.querySelectorAll("[data-sec]").forEach(b=>b.onclick=()=>{remaining=+b.dataset.sec;showTime()});
-el("timerStart").onclick=()=>{if(timer){clearInterval(timer);timer=null;el("timerStart").textContent="Riprendi";return}el("timerStart").textContent="Pausa";timer=setInterval(()=>{if(remaining>0){remaining--;showTime()}else{clearInterval(timer);timer=null;el("timerStart").textContent="Avvia";if(navigator.vibrate)navigator.vibrate([250,100,250]);}},1000)};
+let alarmAudio=null;
+function prepareAlarm(){try{const AC=window.AudioContext||window.webkitAudioContext;if(AC){if(!alarmAudio)alarmAudio=new AC();if(alarmAudio.state==="suspended")alarmAudio.resume();}}catch(e){}}
+function playAlarm(){try{if(alarmAudio){if(alarmAudio.state==="suspended")alarmAudio.resume();[0,0.32,0.64].forEach(delay=>{const osc=alarmAudio.createOscillator(),gain=alarmAudio.createGain();osc.type="sine";osc.frequency.value=880;gain.gain.setValueAtTime(0.0001,alarmAudio.currentTime+delay);gain.gain.exponentialRampToValueAtTime(0.22,alarmAudio.currentTime+delay+0.025);gain.gain.exponentialRampToValueAtTime(0.0001,alarmAudio.currentTime+delay+0.22);osc.connect(gain);gain.connect(alarmAudio.destination);osc.start(alarmAudio.currentTime+delay);osc.stop(alarmAudio.currentTime+delay+0.24);});}}catch(e){}if(navigator.vibrate)navigator.vibrate([300,120,300,120,500]);}
+el("timerStart").onclick=()=>{if(timer){clearInterval(timer);timer=null;el("timerStart").textContent="Riprendi";return}prepareAlarm();if(remaining<=0)remaining=90;el("timerStart").textContent="Pausa";timer=setInterval(()=>{if(remaining>0){remaining--;showTime()}else{clearInterval(timer);timer=null;el("timerStart").textContent="Avvia";playAlarm();}},1000)};
 el("timerReset").onclick=()=>{clearInterval(timer);timer=null;remaining=90;showTime();el("timerStart").textContent="Avvia"};
-el("export").onclick=()=>{const blob=new Blob([JSON.stringify({app:"Stu Gym Tracker",version:1,exportedAt:new Date().toISOString(),data},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="stu-gym-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();URL.revokeObjectURL(a.href)};
-el("importFile").onchange=async e=>{try{const obj=JSON.parse(await e.target.files[0].text());if(!obj.data||!Array.isArray(obj.data.sessions))throw Error();if(confirm("Importare il backup? Lo storico attuale verrà sostituito.")){data=obj.data;save();renderHistory();renderProgress();alert("Backup importato.")}}catch{alert("File di backup non valido.")}e.target.value=""};
-renderDays();renderExercises();renderHistory();renderProgress();showTime();
+el("export").onclick=()=>{const blob=new Blob([JSON.stringify({app:"Stu Gym Tracker",version:2,exportedAt:new Date().toISOString(),data},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="stu-gym-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();URL.revokeObjectURL(a.href)};
+el("importFile").onchange=async e=>{try{const obj=JSON.parse(await e.target.files[0].text());if(!obj.data||!Array.isArray(obj.data.sessions))throw Error();if(confirm("Importare il backup? I dati attuali verranno sostituiti.")){data={...obj.data,foodEntries:obj.data.foodEntries||[],weights:obj.data.weights||[],water:obj.data.water||{},goalWeight:obj.data.goalWeight||null};save();renderHistory();renderProgress();renderNutrition();alert("Backup importato.")}}catch{alert("File di backup non valido.")}e.target.value=""};
+
+const todayKey=()=>new Date().toISOString().slice(0,10);
+function renderNutrition(){const today=todayKey(),items=data.foodEntries.filter(x=>x.date===today);const sum=k=>items.reduce((a,x)=>a+(Number(x[k])||0),0);el("foodDate").textContent=new Date().toLocaleDateString("it-IT");el("kcalToday").textContent=Math.round(sum("kcal"));el("proteinToday").textContent=sum("protein").toFixed(1).replace(/\.0$/,'')+" g";el("carbsToday").textContent=sum("carbs").toFixed(1).replace(/\.0$/,'')+" g";el("fatToday").textContent=sum("fat").toFixed(1).replace(/\.0$/,'')+" g";el("foodList").innerHTML=items.length?items.map(x=>`<div class="history-item"><div class="mealrow"><b>${x.meal} · ${x.name}</b><span class="tag">${x.kcal} kcal</span></div><p>P ${x.protein} g · C ${x.carbs} g · G ${x.fat} g</p><div class="actions"><button class="btn danger" onclick="deleteFood(${x.id})">Elimina</button></div></div>`).join(""):'<div class="empty">Nessun alimento registrato oggi.</div>';el("waterTotal").textContent=(data.water[today]||0)+" ml";el("goalInput").value=data.goalWeight||"";const last=data.weights[data.weights.length-1];el("weightSummary").textContent=last?`Ultimo peso: ${last.kg} kg (${new Date(last.date+"T12:00:00").toLocaleDateString("it-IT")}). Obiettivo: ${data.goalWeight?data.goalWeight+" kg":"non impostato"}.`:"Ancora nessuna misurazione registrata.";el("weightHistory").innerHTML=data.weights.length?data.weights.slice(-8).reverse().map(w=>`<p class="muted">${new Date(w.date+"T12:00:00").toLocaleDateString("it-IT")} · <b>${w.kg} kg</b></p>`).join(""):"";}
+function deleteFood(id){data.foodEntries=data.foodEntries.filter(x=>x.id!==id);save();renderNutrition()}
+el("addFood").onclick=()=>{const name=el("foodName").value.trim(),kcal=Number(el("foodKcal").value);if(!name||!Number.isFinite(kcal)||kcal<0){alert("Inserisci almeno alimento e calorie.");return}data.foodEntries.push({id:Date.now(),date:todayKey(),meal:el("mealType").value,name,kcal,protein:Number(el("foodProtein").value)||0,carbs:Number(el("foodCarbs").value)||0,fat:Number(el("foodFat").value)||0});save();["foodName","foodKcal","foodProtein","foodCarbs","foodFat"].forEach(id=>el(id).value="");renderNutrition()};
+el("clearFoodDay").onclick=()=>{if(confirm("Eliminare tutti gli alimenti registrati oggi?")){data.foodEntries=data.foodEntries.filter(x=>x.date!==todayKey());save();renderNutrition()}};
+document.querySelectorAll("[data-water]").forEach(b=>b.onclick=()=>{const k=todayKey();data.water[k]=(data.water[k]||0)+Number(b.dataset.water);save();renderNutrition()});
+el("waterReset").onclick=()=>{data.water[todayKey()]=0;save();renderNutrition()};
+el("saveWeight").onclick=()=>{const kg=Number(el("weightInput").value),goal=Number(el("goalInput").value);if(!kg||kg<20||kg>350){alert("Inserisci un peso valido in kg.");return}const today=todayKey();const existing=data.weights.findIndex(x=>x.date===today);if(existing>=0)data.weights[existing].kg=kg;else data.weights.push({date:today,kg});data.weights.sort((a,b)=>a.date.localeCompare(b.date));data.goalWeight=goal>0?goal:null;save();renderNutrition();alert("Peso e obiettivo salvati!")};
+
+renderDays();renderExercises();renderHistory();renderProgress();renderNutrition();showTime();
 if("serviceWorker" in navigator && location.protocol!=="file:")window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
 </script>
 </body></html>
