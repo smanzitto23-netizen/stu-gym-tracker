@@ -1,5 +1,5 @@
-STU GYM TRACKER 2.2.2 — FIX SELEZIONE RISULTATI
+STU GYM TRACKER 2.3 — OBIETTIVO CALORICO GIORNALIERO
 
-Questa versione usa un handler diretto su ogni risultato (oltre al fallback click), anziché affidarsi soltanto al click delegato. Il service worker passa a cache v6, si attiva subito e privilegia la versione online per evitare di servire HTML vecchio.
+Novità: nella sezione Cibo trovi un obiettivo calorico giornaliero modificabile manualmente. Il riepilogo mostra calorie assunte, obiettivo, calorie rimanenti (o superate), barra di avanzamento e ripartizione delle calorie per colazione, spuntini, pranzo e cena. Il totale si aggiorna quando aggiungi o elimini alimenti.
 
-Aggiornamento: esporta prima un backup JSON; carica nella root GitHub tutti i file dello ZIP sostituendo quelli esistenti; fai Commit changes e attendi Pages verde. Poi chiudi completamente Safari e l'app Home. Riapri il sito in Safari, ricarica e riprova. Non cancellare i dati del sito e non disinstallare la PWA. La chiave localStorage resta stuGymTracker_v1.
+Aggiornamento: esporta prima un backup JSON. Estrai lo ZIP e carica nella root del repository GitHub tutti i file inclusi, sostituendo quelli esistenti; esegui Commit changes e attendi il completamento verde di Pages. La chiave localStorage resta stuGymTracker_v1 e i dati esistenti vengono mantenuti. Il service worker usa una nuova cache per distribuire la versione aggiornata.
