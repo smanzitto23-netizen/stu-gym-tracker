@@ -1,22 +1,13 @@
-STU GYM TRACKER 2.2 – AGGIORNAMENTO DIARIO ALIMENTARE
+STU GYM TRACKER 2.2 - CORREZIONE SELEZIONE ALIMENTI
 
-NOVITA'
-- Ricerca online di alimenti tramite Open Food Facts.
-- Selezione del prodotto e calcolo automatico di kcal, proteine, carboidrati e grassi in base ai grammi inseriti.
-- Campo per lo stato/tipo di cottura.
-- Campo separato per l'olio aggiunto (stima: 9 kcal e 1 g di grassi per grammo).
-- Il diario, i dati di allenamento, i pesi e l'idratazione mantengono la stessa chiave locale stuGymTracker_v1.
-- La versione del service worker è stata aggiornata per distribuire i nuovi file.
+Aggiornamento correttivo: rende selezionabili i risultati della ricerca alimentare anche su Safari/iPhone e nella PWA, usando un gestore di clic delegato. Aggiornata anche la cache del service worker per forzare il caricamento della nuova versione.
 
-INSTALLAZIONE AGGIORNAMENTO
-1. Prima di aggiornare, apri l'app attuale e vai nella sezione Backup: esporta un backup JSON.
-2. Estrai tutti i file dello ZIP.
-3. Nel repository GitHub stu-gym-tracker, apri Add file > Upload files.
-4. Carica i file nella cartella principale, sovrascrivendo quelli omonimi: index.html, sw.js, manifest.webmanifest, icon-192.png, icon-512.png e ISTRUZIONI.txt.
-5. Conferma con Commit changes.
-6. Attendi il completamento della pubblicazione GitHub Pages. Chiudi e riapri l'app; se mostra ancora la vecchia versione, chiudi Safari/app e riapri dopo qualche minuto.
+Per aggiornare:
+1. Fai prima un backup JSON dall'app.
+2. Estrai questo ZIP.
+3. Nel repository GitHub stu-gym-tracker carica nella cartella principale tutti i file contenuti nello ZIP, sostituendo quelli esistenti.
+4. Esegui Commit changes.
+5. Attendi il completamento verde di Pages build and deployment.
+6. Chiudi completamente Stu Gym Tracker e riaprila. Se necessario, apri una volta il sito in Safari e ricarica la pagina.
 
-NOTA SUI DATI NUTRIZIONALI
-La ricerca interroga Open Food Facts e mostra schede di prodotti alimentari con valori dichiarati per 100 g. Non è un calcolo clinico né una banca dati universale di alimenti generici. Scegliere una scheda coerente con alimento, marca e preparazione è essenziale. Il tipo di cottura viene registrato come informazione: il dato nutrizionale selezionato non viene corretto automaticamente in base alla cottura, perché la variazione dipende da alimento, tempo, perdita d'acqua e grassi aggiunti. L'olio viene aggiunto separatamente come stima.
-
-La ricerca richiede connessione Internet. I dati del diario restano salvati localmente sul dispositivo/browser, non su un server.
+Non cancellare i dati del sito né disinstallare la PWA. La chiave localStorage resta stuGymTracker_v1.
