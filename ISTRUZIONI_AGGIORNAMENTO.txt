@@ -1,13 +1,5 @@
-STU GYM TRACKER 2.2 - CORREZIONE SELEZIONE ALIMENTI
+STU GYM TRACKER 2.2.2 — FIX SELEZIONE RISULTATI
 
-Aggiornamento correttivo: rende selezionabili i risultati della ricerca alimentare anche su Safari/iPhone e nella PWA, usando un gestore di clic delegato. Aggiornata anche la cache del service worker per forzare il caricamento della nuova versione.
+Questa versione usa un handler diretto su ogni risultato (oltre al fallback click), anziché affidarsi soltanto al click delegato. Il service worker passa a cache v6, si attiva subito e privilegia la versione online per evitare di servire HTML vecchio.
 
-Per aggiornare:
-1. Fai prima un backup JSON dall'app.
-2. Estrai questo ZIP.
-3. Nel repository GitHub stu-gym-tracker carica nella cartella principale tutti i file contenuti nello ZIP, sostituendo quelli esistenti.
-4. Esegui Commit changes.
-5. Attendi il completamento verde di Pages build and deployment.
-6. Chiudi completamente Stu Gym Tracker e riaprila. Se necessario, apri una volta il sito in Safari e ricarica la pagina.
-
-Non cancellare i dati del sito né disinstallare la PWA. La chiave localStorage resta stuGymTracker_v1.
+Aggiornamento: esporta prima un backup JSON; carica nella root GitHub tutti i file dello ZIP sostituendo quelli esistenti; fai Commit changes e attendi Pages verde. Poi chiudi completamente Safari e l'app Home. Riapri il sito in Safari, ricarica e riprova. Non cancellare i dati del sito e non disinstallare la PWA. La chiave localStorage resta stuGymTracker_v1.
